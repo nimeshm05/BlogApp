@@ -4,6 +4,9 @@ import os
 import sys
 
 
+# django_admin_log, django_content_type, auth_user, blog_post, user_profile, polls_poll
+# action_flags -> 1-insert, 2-update, 3-delete
+
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'firstProject.settings')

@@ -31,6 +31,7 @@
         <!-- Navbar Right Side -->
         <div class="navbar-nav">
             {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'poll_home' %}">Polls</a>
                 <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a>
                 <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
@@ -55,18 +56,68 @@
         {% endif %}
       {% block content %}{% endblock %}
     </div>
+
     <div class="col-md-4">
+        <div class="row">
       <div class="content-section">
-        <h3>Our Sidebar</h3>
-        <p class='text-muted'>You can put any information here you'd like.
-          <ul class="list-group">
-            <li class="list-group-item list-group-item-light">Latest Posts</li>
-            <li class="list-group-item list-group-item-light">Announcements</li>
-            <li class="list-group-item list-group-item-light">Calendars</li>
-            <li class="list-group-item list-group-item-light">etc</li>
-          </ul>
-        </p>
+        <h3>Polls</h3>
+        <p class='text-muted'>Participate in polls. You can create and answer polls</p>
+          <a href="{% url 'poll_home' %}">
+              {% if user.is_authenticated %}
+              <button class="btn btn-outline-info" type="submit">Go to polls</button>
+
+              {% else %}
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}
+          </a>
       </div>
+            </div>
+
+        <div class="row">
+      <div class="content-section">
+        <h3>Users world</h3>
+        <p class='text-muted'>If you have trouble searching for a specific user, you can view username, email and location of all users.</p>
+          <a href="{% url 'user-common' %}">
+              {% if user.is_authenticated %}
+              <button class="btn btn-outline-info" type="submit">Go to users world</button>
+              {% else %}
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}
+          </a>
+      </div>
+        </div>
+
+        <div class="row">
+      <div class="content-section">
+        <h3>Blog titles</h3>
+        <p class='text-muted'>You can also view all blog titles here.</p>
+          <a href="{% url 'user-titles' %}">
+              {% if user.is_authenticated %}
+              <button class="btn btn-outline-info" type="submit">See blog titles</button>
+              {% else %}
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}
+          </a>
+      </div>
+        </div>
+
+        <div class="row">
+      <div class="content-section">
+        <h3>Blog titles</h3>
+        <p class='text-muted'>You can also view all blog titles here.</p>
+          <a href="{% url 'user-fav' %}">
+              {% if user.is_authenticated %}
+              <button class="btn btn-outline-info" type="submit">See fav</button>
+              {% else %}
+              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+              {% endif %}
+          </a>
+      </div>
+        </div>
     </div>
   </div>
 </main>

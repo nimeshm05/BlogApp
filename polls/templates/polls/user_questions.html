@@ -1,0 +1,25 @@
+{% extends "polls/base_poll.html" %}
+{% load widget_tweaks %}
+{% block main %}
+<h1 class="text-center p-3">List of User questions and User blogs</h1>
+<div class="container">
+    <table class="table">
+
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Username</th>
+        <th scope="col">No.of questions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for i in data3 %}
+    <tr>
+        <td>{{ i.username }}</td>
+        <td>{{ i.count }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

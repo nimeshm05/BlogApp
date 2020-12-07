@@ -9,5 +9,8 @@ urlpatterns = [
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('post/<int:pk>/update', PostUpdateView.as_view(), name='post-update'),
     path('post/<int:pk>/delete', PostDeleteView.as_view(), name='post-delete'),
-    path('about/', views.about, name='blog-about')
+    path('about/', views.about, name='blog-about'),
+    path('common/', views.common, name='user-common'),
+    path('titles/', views.titles, name='user-titles'),
+    path('fav/', views.favourite_book, name='user-fav'),
 ]
