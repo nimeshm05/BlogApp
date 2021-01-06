@@ -5,6 +5,9 @@
 
 {% block main %}
 <div class="row">
+    <h1 class="text-center">Last {{ polls_triggers.message }}</h1>
+</div>
+<div class="row">
     <div class="col-lg-8 col-lg-offset-2">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -14,6 +17,7 @@
             <ul class="list-group">
                 {% for poll in polls %}
                 <li class="list-group-item">
+                    <span class="pull-left" style="margin-right:1.4em;">{{ forloop.counter }}</span>
                     <strong>{{ poll.question }}</strong>
                     <span class="pull-right">
                         <a href="{% url 'poll_vote' poll.id %}" class="btn btn-info btn-xs">Vote</a> &nbsp;

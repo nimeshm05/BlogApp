@@ -1,11 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.db import connection
 from django.contrib.auth.models import User
+from django.urls import reverse
+
 from .models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
+
+def like_view(request, pk):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.likes.add(request.user)
+    return HttpResponseRedirect(reverse('post-detail', args=[str(pk)]))
 
 def home(request):
     context = {
@@ -81,6 +88,12 @@ class UserPostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
 
+    def get_context_data(self, **kwargs):
+        stuff = get_object_or_404(Post, id=self.kwargs['pk'])
+        total_likes = stuff.total_likes()
+        context = super(PostDetailView, self).get_context_data()
+        context['total_likes'] = total_likes
+        return context
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
@@ -120,4 +133,13 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 def about(request):
-    return render(request, 'blog/about.html', {'title': 'About'})
+    cursor3 = connection.cursor()
+    cursor4 = connection.cursor()
+    cursor3.execute("select max(post_id), b1.post_id, b2.title, b2.category, b3.username from blog_post_likes b1 "
+                    "inner join blog_post b2 on "
+                    "b1.post_id = b2.id inner join auth_user b3 on b3.id = b2.author_id group by post_id order by "
+                    "count(*) desc limit 1")
+    cursor4.execute("select category from blog_post union select category from polls_poll order by category")
+    about_context = dictfetchall(cursor3)
+    about_context2 = dictfetchall(cursor4)
+    return render(request, 'blog/about.html', {'about_context': about_context, 'about_context2': about_context2})

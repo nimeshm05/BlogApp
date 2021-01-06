@@ -1,4 +1,26 @@
 {% extends "blog/base.html" %}
 {% block content %}
-    <h1>This is about page! voila!</h1>
+    <h1>Check few statistics!</h1>
+    {% for stat in about_context %}
+    <div class="card" style="margin-top: 2em">
+        <h5 class="card-header text-info">Most liked blog post!</h5>
+        <div class="card-body">
+            <h5 class="card-title p-3 mb-2 bg-success text-white">{{ stat.title }}</h5>
+            <p class="card-text"><strong>Category:</strong> {{ stat.category }}</p>
+            <p class="card-text"><strong>Posted by:</strong> {{ stat.username }}</p>
+            <a href="{% url 'post-detail' stat.post_id %}" class="btn btn-primary">Read the post</a>
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="card" style="margin-top: 3em">
+        <h5 class="card-header text-info">Most famous category of blogs and polls!</h5>
+        <div class="card-body">
+            {% for stat2 in about_context2 %}
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-success text-white">{{ stat2.category }}</li>
+            </ul>
+                {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

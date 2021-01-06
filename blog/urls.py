@@ -13,4 +13,5 @@ urlpatterns = [
     path('common/', views.common, name='user-common'),
     path('titles/', views.titles, name='user-titles'),
     path('fav/', views.favourite_book, name='user-fav'),
+    path('like/<int:pk>', views.like_view, name='like_post'),
 ]

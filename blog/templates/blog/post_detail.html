@@ -17,5 +17,13 @@
       <h2 class="article-title">{{ object.title }}</h2>
       <p class="article-content">{{ object.content }}</p>
     </div>
+    <form action="{% url 'like_post' post.pk%}" method="post">
+      {% csrf_token %}
+      {% if user.is_authenticated %}
+        <button type="submit" name="post_id" value="{{ post.id }}" class="btn btn-primary">Like - {{ total_likes }}</button>
+      {% else %}
+      <small>Please login to like or unlike the post.</small>
+      {% endif %}
+    </form>
   </article>
 {% endblock content %}

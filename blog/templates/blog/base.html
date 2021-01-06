@@ -26,7 +26,7 @@
       <div class="collapse navbar-collapse" id="navbarToggle">
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-          <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+          <a class="nav-item nav-link" href="{% url 'blog-about' %}">Statistics</a>
         </div>
         <!-- Navbar Right Side -->
         <div class="navbar-nav">
@@ -96,21 +96,6 @@
           <a href="{% url 'user-titles' %}">
               {% if user.is_authenticated %}
               <button class="btn btn-outline-info" type="submit">See blog titles</button>
-              {% else %}
-              <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
-              <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
-              {% endif %}
-          </a>
-      </div>
-        </div>
-
-        <div class="row">
-      <div class="content-section">
-        <h3>Blog titles</h3>
-        <p class='text-muted'>You can also view all blog titles here.</p>
-          <a href="{% url 'user-fav' %}">
-              {% if user.is_authenticated %}
-              <button class="btn btn-outline-info" type="submit">See fav</button>
               {% else %}
               <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
               <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
