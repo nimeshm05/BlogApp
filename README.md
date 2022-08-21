@@ -1,4 +1,2 @@
 # BlogApp
-This is a Django Blog app.
-
-This is a DBMS Mini project for a DBMS Course taken at my college. The detailed report has been included in the Report.pdf file.
+This is a Database Management System project completed as part of my DBMS laboratory curriculum. The website application id developed using Django - a web framework for developing web apps using python.
